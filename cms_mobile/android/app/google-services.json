@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "439120060818",
+    "project_id": "club-management-system-34a1b",
+    "storage_bucket": "club-management-system-34a1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439120060818:android:9b2f455515a1dee853e14b",
+        "android_client_info": {
+          "package_name": "com.example.cms_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439120060818-ub4dd4brt2cncrpsr71vsbpvaf07nkvt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cms_mobile",
+            "certificate_hash": "630d481ca8b7a7368b476bfc6308984950fbc10e"
+          }
+        },
+        {
+          "client_id": "439120060818-d6l2k1ilenil6u49f54pb4fsb4vvu2oa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdxsMZnMubK4GTOBSSRyBaIQR7TwZDx6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439120060818-d6l2k1ilenil6u49f54pb4fsb4vvu2oa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
