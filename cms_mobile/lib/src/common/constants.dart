@@ -16,6 +16,13 @@ class Constants {
     'pageSize': '20'
   };
 
+  static const Map<String, String> requestHeaders = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    //'Authorization': 'Bearer'
+    'Authorization': 'token'
+  };
+
   /// Initial value for emptyMap
   static const Map<String, dynamic> emptyMap = {};
 

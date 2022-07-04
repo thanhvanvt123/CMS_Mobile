@@ -4,7 +4,9 @@ import 'package:cms_mobile/src/data/api_helper.dart';
 import 'package:cms_mobile/src/models/account.dart';
 import 'package:cms_mobile/src/models/club.dart';
 import 'package:cms_mobile/src/models/paging.dart';
+import 'package:cms_mobile/src/models/paging_2.dart';
 import 'package:cms_mobile/src/models/role.dart';
+import 'package:cms_mobile/src/services/global_states/share_states.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/http/utils/body_decoder.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
@@ -54,6 +56,21 @@ abstract class BaseService<T> {
     return paging.data ?? [];
   }
 
+  // Get list instances from API with [query]
+  Future<List<T>> getAllBase2(
+      Map<String, dynamic> query, Map<String, String> request) async {
+    SharedStates sharedStates = Get.find();
+    String token = sharedStates.token;
+    Response res = await _apiHelper.getAll(endpoint(),
+        query: query, request: {'Authorization': 'Bearer $token'});
+    print("HTTP STATUS CODE: " +
+        res.statusCode.toString() +
+        "========================================");
+    Paging2<T> paging = Paging2.fromJson(res.body);
+    List<T>? content = paging.rawContent?.map<T>((x) => fromJson(x)).toList();
+    return content ?? [];
+  }
+
   /// Post an instance with [body]
   Future<Account?> postBase(Map<String, dynamic> body) async {
     Response res = await _apiHelper.postOne(endpoint(), body);
@@ -78,6 +95,20 @@ abstract class BaseService<T> {
       return true;
     }
     return false;
+  }
+
+  Future<String?> postBase2(Map<String, dynamic> body) async {
+    Response res = await _apiHelper.postOne(endpoint(), body);
+    print("HTTP STATUS CODE: " +
+        res.statusCode.toString() +
+        "========================================");
+    String token = Paging.fromJson(res.body).convertToListV2(fromJson);
+    if (res.statusCode == HttpStatus.created) {
+      return token;
+    }
+    if (res.statusCode == HttpStatus.ok) {
+      return token;
+    }
   }
 
 

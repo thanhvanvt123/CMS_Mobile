@@ -8,6 +8,7 @@ mixin IAccountService {
   Future<Account?> getAccountById(int id);
   Future<Account?> getAccountByEmail(String email, String password);
   Future<Account?> createAccount(Map<String, dynamic> account);
+  Future<String?> createAccount2(Map<String, dynamic> account);
   Future<bool> updateProfile(int id, Map<String, String> data);
   Future<List<dynamic>?> getAccounts();
   Future<Account?> loginWithFirebase(String idToken);
@@ -59,6 +60,12 @@ class AccountService extends BaseService<Account> implements IAccountService {
     
     return postBase(account);
   }
+
+   @override
+  Future<String?> createAccount2( Map<String, dynamic> account) {
+        return postBase2(account);
+  }
+
 
   @override
   Future<bool> updateProfile(int id, Map<String, String> data) {

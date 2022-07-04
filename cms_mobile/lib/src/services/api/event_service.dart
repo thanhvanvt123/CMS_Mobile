@@ -6,7 +6,7 @@ import 'package:cms_mobile/src/services/api/base_service.dart';
 
 mixin IEventService {
   Future<Event?> getEventById(int id);
-  Future<List<dynamic>?> getEvents();
+  Future<List<Event>> getEvents();
 }
 
 class EventService extends BaseService<Event> implements IEventService {
@@ -22,8 +22,8 @@ class EventService extends BaseService<Event> implements IEventService {
   }
 
   @override
-  Future<List?> getEvents() {
-    return getAllBase({});
+  Future<List<Event>> getEvents() {
+    return getAllBase2({}, {});
   }
 
   @override

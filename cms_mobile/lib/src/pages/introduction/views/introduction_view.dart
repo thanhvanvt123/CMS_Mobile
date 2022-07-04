@@ -50,7 +50,7 @@ class IntroductionPage extends GetView<IntroductionController> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Colors.blue.shade500),
+                          MaterialStateProperty.all(Color(0xFF0C9869)),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),

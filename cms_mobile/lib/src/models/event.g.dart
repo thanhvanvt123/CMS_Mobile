@@ -8,40 +8,52 @@ part of 'event.dart';
 
 Event _$EventFromJson(Map<String, dynamic> json) {
   return Event(
-    //userId: json['accountId'] as int?,
-    eventName: json['eventName'] as String?,
-    description: json['description'] as String?,
-    duration: json['duration'] as String?,
-    createdBy: json['createdBy'] as String?,
-    email: json['email'] as String?,
-    role: json['role'] as Role?,
-    startDate: json['startDate'] == null
-        ? null
-        : DateTime.parse(json['startDate'] as String),
-    club: json['clubs'] as List<Club>,
-    // reward: json['rewards'] as List<Reward>,
-    // budget: json['budgets'] as List<Budget>,
-    // eventItem: json['eventItems'] as List<EventItem>,
-    // gallery: json['galleries'] as List<Gallery>,
-    // document: json['documents'] as List<Document>,
-
+    eventId: json['eventId'] as int?,
+      eventName: json['eventName'] as String?,
+      description: json['description'] as String?,
+      location: json['location'] as String?,
+      status: json['status'] as String?,
+      createdBy: json['createdBy'] as int?,
+      reason: json['reason'] as String?,
+      numberOfParticipants: json['numberOfParticipants'] as int?,
+      startDate: json['startDate'] == null
+          ? null
+          : DateTime.parse(json['startDate'] as String),
+      endDate: json['startDate'] == null
+          ? null
+          : DateTime.parse(json['startDate'] as String),
+      createdAt: json['startDate'] == null
+          ? null
+          : DateTime.parse(json['startDate'] as String),
+      updatedAt: json['startDate'] == null
+          ? null
+          : DateTime.parse(json['startDate'] as String),
+      created: convertMapToList(json['created']),
+      budget:  json['budgets'] == null ? null : json['budgets'] as List,
+      eventItem:  json['eventItems'] == null ? null : json['eventItems'] as List,
+      reward:  json['rewards'] == null ? null : json['rewards'] as List,
   );
 }
 
+Account convertMapToList(Map<String, dynamic> mapData) {
+    return Account.fromJson(mapData); 
+  }
+
 Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
-      //'accountId': instance.userId,
+      'eventId': instance.eventId,
       'eventName': instance.eventName,
       'description': instance.description,
-      'duration': instance.duration,
+      'location': instance.location,
+      'status': instance.status,
       'createdBy': instance.createdBy,
-      'email': instance.email,
-      'role': instance.role,
+      'reason': instance.reason,
+      'numberOfParticipants': instance.numberOfParticipants,
       'startDate': instance.startDate,
-      'clubs': instance.club,
-      // 'rewards': instance.club.toList(),
-      // 'budgets': instance.club.toList(),
-      // 'eventItems': instance.club.toList(),
-      // 'galleries': instance.club.toList(),
-      // 'documents': instance.club.toList(),
-
+      'endDate': instance.endDate,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+      'created': instance.created,
+      'budgets': instance.budget,
+      'eventItems': instance.eventItem,
+      'rewards': instance.reward,
     };

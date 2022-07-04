@@ -27,9 +27,7 @@ class LoginController extends GetxController {
   // User login in app
   Account? account;
   final FirebaseAuth auth = FirebaseAuth.instance;
-  //FirebaseUser loggedInUser;
   GoogleSignIn? _googleSignIn;
-  //_auth().signInWithEmailAndPassword(email, password),
   // Show password
   final isShowPass = true.obs;
   //final String email, password, validCredentials = "";
@@ -101,13 +99,12 @@ class LoginController extends GetxController {
         }
       };
       Account? createResult = await _accountService.createAccount(userLogin);
+      String? b_token = await _accountService.createAccount2(userLogin);
       sharedStates.account = createResult;
+      sharedStates.token = b_token!;
       if (createResult != null && sharedStates.account!.accountStatus == 'Đang hoạt động') {
         List o = sharedStates.account!.role!.toList();
-        print(".......... " + o.length.toString());
         for (Map<String, dynamic> item in o) {
-          print(item);
-          print(item.keys.elementAt(1));
           if (item.values.elementAt(1) == 3) {
             BotToast.showText(text: "Đăng nhập thành công");
             Get.toNamed(Routes.home);
@@ -115,10 +112,8 @@ class LoginController extends GetxController {
             BotToast.showText(text: "Đăng nhập thất bại");
           }
         }
-
       }
     } catch (e) {
-      log("Lỗi: " + e.toString());
       BotToast.showText(text: "Your account not belong to FPT university!");
     }
     BotToast.closeAllLoading();

@@ -72,7 +72,7 @@ class LoginPage extends GetView<LoginController> {
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blue.shade500),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFF0C9869)),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0),

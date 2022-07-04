@@ -18,7 +18,7 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade400,
+        backgroundColor: Color(0xFF0C9869),
         bottomOpacity: 50,
         toolbarHeight: 100,
         automaticallyImplyLeading: false,
@@ -64,11 +64,11 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
                   width: 400,
                   height: 150,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade400,
+                    color: Color(0xFF0C9869).withOpacity(0.5),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 5,
-                        color: Colors.blue.shade400,
+                        color: Color(0xFF0C9869).withOpacity(0.5),
                         offset: Offset(0, 2),
                       )
                     ],
@@ -193,7 +193,6 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
           ),
         ),
       ),
-      //bottomNavigationBar: CustomBottombar(),
     );
   }
 }

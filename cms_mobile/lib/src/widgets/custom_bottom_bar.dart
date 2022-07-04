@@ -24,7 +24,7 @@ class BottomItem extends SalomonBottomBarItem {
     required this.route,
     required this.text,
     required this.icon,
-    this.color = Colors.blueAccent,
+    this.color = const Color(0xFF0C9869),
   }) : super(
     title: Text(text),
     icon: icon,
