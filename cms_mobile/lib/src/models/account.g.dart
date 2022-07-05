@@ -20,8 +20,8 @@ Account _$AccountFromJson(Map<String, dynamic> json) {
     modifyDate: json['updatedAt'] == null
         ? null
         : DateTime.parse(json['updatedAt'] as String),
-    role:  json['roles'] as List,
-    club: json['clubs'] as List,
+    role:  json['roles'] == null ? null : json['roles'] as List,
+    club: json['clubs'] == null ? null : json['clubs'] as List,
   );
 }
 

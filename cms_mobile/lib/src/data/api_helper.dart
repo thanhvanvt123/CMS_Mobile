@@ -7,6 +7,7 @@ mixin IApiHelper {
   Future<Response> getAll<T>(
     String uri, {
     Map<String, dynamic> query = Constants.defaultPagingQuery,
+    Map<String, String> request = Constants.requestHeaders,
   });
 
   /// Get 1 by Id from API [endpoint] using [uri] and [id]
@@ -78,8 +79,9 @@ class ApiHelper extends GetConnect with IApiHelper {
   Future<Response> getAll<T>(
     String uri, {
     Map<String, dynamic>? query = Constants.defaultPagingQuery,
+    Map<String, String>? request = Constants.requestHeaders,
   }) {
-    return get<T>(uri, query: query);
+    return get<T>(uri, query: query, headers: request);
   }
 
   @override

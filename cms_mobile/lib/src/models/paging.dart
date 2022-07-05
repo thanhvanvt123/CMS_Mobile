@@ -29,14 +29,15 @@ class Paging<T> {
     content = null;
   }
   // Convert json array to list
-  Account convertToListV2(Function fromJson) {
-    Account account = new Account();
+  String convertToListV2(Function fromJson) {
+    String token = '';
+    //Account account = new Account();
     rawData!.forEach((key, value) {
-      if(key == "account"){
-          account = Account.fromJson(value); 
-        }
-     });
-    return account;
+      if (key == "token") {
+        token = value;
+      }
+    });
+    return token;
   }
 
   Account convertToListV3(Function fromJson) {

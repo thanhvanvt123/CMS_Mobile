@@ -15,7 +15,7 @@ class Endpoints {
   /// Refresh token endpoint version /api/v1
   static const refreshToken = '$apiVer/auth/refresh-token';
 
-  static const event = '$apiVer/moderator/getEvents';
+  static const event = '$apiVer/moderator-manager/getEvents';
 
 
 }
