@@ -16,6 +16,7 @@ class Endpoints {
   static const refreshToken = '$apiVer/auth/refresh-token';
 
   static const event = '$apiVer/moderator-manager/getEvents';
-
-
+  static const eventDetail = '$apiVer/moderator-manager/getEventDetail?eventId=';
+  static const notification = '$apiVer/moderator-manager/getNotifications';
+  static const club = '$apiVer/moderator-manager/getClubs';
 }

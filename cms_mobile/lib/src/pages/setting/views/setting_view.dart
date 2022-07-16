@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:cms_mobile/src/pages/setting/controllers/setting_controller.dart';
 import 'package:cms_mobile/src/routes/routes.dart';
 import 'package:cms_mobile/src/services/global_states/share_states.dart';
+import 'package:cms_mobile/src/widgets/custom_bottom_bar.dart';
+import 'package:cms_mobile/src/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +14,21 @@ class SettingPage extends GetView<SettingController> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Color(0xFF0C9869).withOpacity(0.5),
+        foregroundColor: Color(0xFF0C9869).withOpacity(0.05),
+        centerTitle: true,
+        title: Text(
+          'Cài đặt',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: Color(0xff114B5F),
+              fontSize: 25,
+              fontWeight: FontWeight.bold),
+        ),
+      ),
       body: Column(
-        children: <Widget>[
+        children: <Widget>[      
           SizedBox(height: 100),
           GestureDetector(
             onTap: () {
@@ -60,8 +75,7 @@ class SettingPage extends GetView<SettingController> {
           GestureDetector(
             child: Container(
               height: 55,
-              margin:
-              EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 20),
+              margin: EdgeInsets.symmetric(horizontal: 30).copyWith(bottom: 20),
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
@@ -130,6 +144,7 @@ class SettingPage extends GetView<SettingController> {
           ),
         ],
       ),
+      bottomNavigationBar: CustomBottombar(),
     );
   }
 }

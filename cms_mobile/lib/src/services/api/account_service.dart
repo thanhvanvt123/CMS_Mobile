@@ -28,7 +28,7 @@ class AccountService extends BaseService<Account> implements IAccountService {
 
   @override
   Future<Account?> getAccountById(int id) {
-    return getByIdBase(id);
+    return getByIdBase(id, {});
   }
 
   @override

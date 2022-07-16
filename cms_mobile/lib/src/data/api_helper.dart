@@ -11,8 +11,9 @@ mixin IApiHelper {
   });
 
   /// Get 1 by Id from API [endpoint] using [uri] and [id]
-  Future<Response> getById<T>(String endpoint, dynamic id);
-
+  Future<Response> getById<T>(String endpoint, dynamic id, {Map<String, String> request = Constants.requestHeaders});
+  /// Get 1 by Id from API [endpoint] using [uri] and [id]
+  Future<Response> getById1(String endpoint, dynamic id, {Map<String, String> request = Constants.requestHeaders});
   /// Post 1 to API [endpoint] providing [data]
   Future<Response> postOne(
     String endpoint,
@@ -85,8 +86,13 @@ class ApiHelper extends GetConnect with IApiHelper {
   }
 
   @override
-  Future<Response> getById<T>(String endpoint, dynamic id) {
-    return get<T>('$endpoint/$id');
+  Future<Response> getById<T>(String endpoint, dynamic id, {Map<String, String>? request = Constants.requestHeaders}) {
+    return get<T>('$endpoint$id', headers: request);
+  }
+
+  @override
+  Future<Response> getById1(String endpoint, dynamic id, {Map<String, String>? request = Constants.requestHeaders}) {
+    return get('$endpoint$id', headers: request);
   }
 
   @override

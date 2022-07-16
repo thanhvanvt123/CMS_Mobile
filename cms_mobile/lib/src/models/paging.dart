@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cms_mobile/src/models/account.dart';
+import 'package:cms_mobile/src/models/event.dart';
 import 'package:cms_mobile/src/models/role.dart';
 import 'package:flutter/material.dart';
 
@@ -52,15 +53,16 @@ class Paging<T> {
     return account;
   }
 
-  Role convertToListV4(Function fromJson) {
-    Role role = new Role();
+  EventDetail convertToListV4(Function fromJson) {
+    EventDetail event = new EventDetail();
     rawData!.forEach((key, value) {
-      if(key == "roles"){
-          role = Role.fromJson(value); 
+      if(key == "event"){
+          event = EventDetail.fromJson(value); 
 
         }
     });
-    return role;
+    //print("event=== " + event.toString());
+    return event;
   }
 
   factory Paging.fromJson(Map<String, dynamic> json) => Paging<T>(
