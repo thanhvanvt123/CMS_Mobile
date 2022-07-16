@@ -1,12 +1,9 @@
 import 'dart:async';
 
-import 'package:cms_mobile/src/models/budget.dart';
-import 'package:cms_mobile/src/models/event.dart';
-import 'package:cms_mobile/src/models/item.dart';
-import 'package:cms_mobile/src/models/reward.dart';
+import 'package:cms_mobile/src/models/club.dart';
 import 'package:cms_mobile/src/routes/routes.dart';
+import 'package:cms_mobile/src/services/api/club_service.dart';
 import 'package:cms_mobile/src/services/api/event_detail_service.dart';
-import 'package:cms_mobile/src/services/api/event_service.dart';
 import 'package:cms_mobile/src/services/global_states/share_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,71 +12,46 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:intl/intl.dart';
 
-class HomeController extends GetxController {
+class ClubController extends GetxController {
   SharedStates states = Get.find();
   TextEditingController keySearch = TextEditingController();
   final ScrollController scrollController = ScrollController();
   final showSlider = true.obs;
   final isSearching = false.obs;
-  final eventName = "".obs;
-  final eventId = 0.obs;
+  final clubName = "".obs;
+  final clubId = 0.obs;
   var searchValue = "".obs;
-  //var listNewEvent = listSearchEvents.obs;
-  // final event = Event().obs;
-  // final listItem = <Items>[].obs;
-  // final listBudget = <Budgets>[].obs;
-  // final listReward = <Rewards>[].obs;
-  // //final eventId = 0.obs;
 
   // load data of event
-  IEventService eventService = Get.find();
-  final listEvents = <Event>[].obs;
+  IClubService clubService = Get.find();
+  final listClubs = <Club>[].obs;
 
-  // Future<void> getEvents() async {
-  //   final paging = (await eventService.getEvents());
-  //   listEvents.value = paging.data!;
+  //IEventDetailService eventDetailService = Get.find();
+
+  // Future<void> goToDetail(int? id) async {
+  //   if (id != null) {
+  //     Get.toNamed(Routes.eventDetail, parameters: {"eventId": id.toString()});
+  //   }
   // }
 
-  IEventDetailService eventDetailService = Get.find();
-  // Future<void> getEventDetail(int? id) async {
-    
-  //   print("========== " + eventId.value.toString());
-  //   Event? eventApi = await eventDetailService.getEventById(eventId.value);
-  //   //var event = await eventService.getEventById(eventId.value);
-  //   // event!.value = event.toString();
-  //   // sharedStates.event = event;
-  //   print("api " + eventApi.toString());
-  //   event.value = eventApi!;
-  //   // if (eventApi != null) {
-  //   //   event.value = eventApi;
-  //   // }
-  //   print("event value " + event.toString());
-  // }
-
-  Future<void> goToDetail(int? id) async {
-    if (id != null) {
-      Get.toNamed(Routes.eventDetail, parameters: {"eventId": id.toString()});
-    }
-  }
-
-  Future<void> getEvents() async {
+  Future<void> getClubs() async {
     //final events = await eventService.getEvents();
     //listEvents.value = events.data ?? [];
-    listEvents.value = await eventService.getEvents();
-    print("========= hello " + listEvents.string);
+    listClubs.value = await clubService.getClubs();
+    print("========= hello " + listClubs.string);
   }
 
-  Future<void> searchEvents(String keySearch) async {
+  Future<void> searchClubs(String keySearch) async {
     if (keySearch.isEmpty) {
-      listSearchEvents.clear();
+      listSearchClubs.clear();
       return;
     }
     //for(int i = 0; i <= listEvents.length; i++) {
       if (!isSearching.value) {
         isSearching.value = true;
-      for (var item in listEvents) {
-        if(item.eventName!.toLowerCase().contains(keySearch)) {
-          listSearchEvents.add(item);
+      for (var item in listClubs) {
+        if(item.clubName!.toLowerCase().contains(keySearch)) {
+          listSearchClubs.add(item);
         }
         //listNewSearchEvents.value = listSearchEvents;
       }
@@ -107,14 +79,6 @@ class HomeController extends GetxController {
   }
 
   // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
-
-  Rx<List<Event>> foundEvents =
-      Rx<List<Event>>([]);
-
-  // @override
   // void onInit() {
   //   super.onInit();
   //   foundEvents.value = listEvents;
@@ -124,8 +88,8 @@ class HomeController extends GetxController {
   // void onClose() {}
   
 
-   final listSearchEvents = <Event>[].obs;
-   final listNewSearchEvents = <Event>[].obs;
+   final listSearchClubs = <Club>[].obs;
+   final listNewSearchClubs = <Club>[].obs;
   
   
   late IO.Socket socket;
@@ -141,7 +105,7 @@ class HomeController extends GetxController {
     //     OptionBuilder()
     //         .setTransports(['websocket']).build());
     socket.onConnect((_) => print('connect'));
-    socket.on("event-add", (_) => getEvents());
+    socket.on("club-add", (_) => getClubs());
     socket.onConnectError((data) => print('error : ' + data.toString()));
   }
 
@@ -154,7 +118,7 @@ class HomeController extends GetxController {
         showSlider.value = true;
       }
     });
-    eventName.value = states.events.value.eventName!;
+    //eventName.value = states.events.value.eventName!;
     return true;
   }
 
@@ -180,7 +144,7 @@ class HomeController extends GetxController {
     super.onInit();
     if (!initPage()) return;
     initPage();
-    getEvents();
+    getClubs();
     connectAndListen();
     // controller1.addListener(() {
       

@@ -14,9 +14,11 @@ class SharedStates extends GetxService {
   Account? account;
   Utils?  utils;
   Event? event;
+  EventDetail? eventDetail;
   Role? role;
   RoleName? rolename;
   String token = '';
-
+ final events =
+      Event(eventId: 12, eventName: "Đại học FPT thành phố Hồ Chí Minh").obs;
 
 }

@@ -6,5 +6,6 @@ class Routes {
   static const String clubs = "/clubs";
   static const String settings = "/settings";
   static const String profileDetail = "/profileDetail";
+  static const String eventDetail = "/eventDetail";
   // static const String profile = "/profile";
 }

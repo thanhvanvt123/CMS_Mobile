@@ -1,37 +1,30 @@
 import 'dart:convert';
 
 import 'package:cms_mobile/src/common/endpoints.dart';
-import 'package:cms_mobile/src/models/event.dart';
+import 'package:cms_mobile/src/models/club.dart';
 import 'package:cms_mobile/src/services/api/base_service.dart';
 
-mixin IEventService {
-  Future<Event?> getEventById(int id);
-  Future<List<Event>> getEvents();
+mixin IClubService {
+  Future<List<Club>> getClubs();
   //Future<List<Event>> searchEvents([String? search]);
-  Future<List<Event>> searchEvents(String keySearch);
+  Future<List<Club>> searchClubs(String keySearch);
 
 }
 
-class EventService extends BaseService<Event> implements IEventService {
+class ClubService extends BaseService<Club> implements IClubService {
   @override
   String endpoint() {
-    return Endpoints.event;
-  }
-
-
-  @override
-  Future<Event?> getEventById(int id) {
-    return getByIdBase(id, {});
+    return Endpoints.club;
   }
 
   @override
-  Future<List<Event>> getEvents() {
+  Future<List<Club>> getClubs() {
     return getAllBase2({}, {});
   }
 
   @override
   fromJson(Map<String, dynamic> json) {
-    return Event.fromJson(json);
+    return Club.fromJson(json);
   }
 
   // @override
@@ -48,7 +41,7 @@ class EventService extends BaseService<Event> implements IEventService {
   // }
 
   @override
-  Future<List<Event>> searchEvents(String keySearch) async {
+  Future<List<Club>> searchClubs(String keySearch) async {
     // var byName = getAllBase2({
     //   "isAll": "true",
     //   "eventName": keySearch,
@@ -65,7 +58,7 @@ class EventService extends BaseService<Event> implements IEventService {
     // print("list ========== " + list.toString());
     // return list;
     return getAllBase2({
-      "eventName": keySearch.toLowerCase(),
+      "clubName": keySearch.toLowerCase(),
     }, {});
   }
 

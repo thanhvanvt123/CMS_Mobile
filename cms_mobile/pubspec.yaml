@@ -50,7 +50,15 @@ dependencies:
   carousel_slider: ^4.0.0
   material_floating_search_bar: ^0.3.4
   loading_animations: ^2.2.0
-
+  socket_io_client: ^2.0.0-beta.4
+  # Use with the sliding up a paned to show infomation when searching
+  sliding_up_panel: ^2.0.0+1
+  # grid view animation
+  flutter_staggered_animations: ^1.0.0
+   # tab view
+  flutter_tab_indicator_styler: ^2.0.0
+  rxdart:
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -65,8 +73,7 @@ dev_dependencies:
   flutter_signin_button: ^2.0.0
   # The following helps generate .part code
   build_runner: ^1.0.0
-  firebase_storage: ^10.0.6
-
+  getwidget:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -95,6 +102,19 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Montserrat
+      # fonts:
+      #   - asset: assets/fonts/Montserrat-Thin.ttf
+      #     weight: 100
+      #   - asset: assets/fonts/Montserrat-Regular.ttf
+      #     weight: 300
+      #   - asset: assets/fonts/Montserrat-Medium.ttf
+      #     weight: 500
+      #   - asset: assets/fonts/Montserrat-Bold.ttf
+      #     weight: 600
+      #   - asset: assets/fonts/Montserrat-ExtraBold.ttf
+      #     weight: 700
   # fonts:
   #   - family: Schyler
   #     fonts:
