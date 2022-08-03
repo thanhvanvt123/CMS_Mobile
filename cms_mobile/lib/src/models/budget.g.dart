@@ -9,15 +9,21 @@ part of 'budget.dart';
 Budgets _$BudgetsFromJson(Map<String, dynamic> json) {
   return Budgets(
     id: json['id'] as int?,
-      price: json['price'] as double?,
-      billImage: json['billImage'] as String?,
+      price: json['price'] as int?,
+      // billImage: (json['billImage'] as List<dynamic>?)
+      //   ?.map((e) => (e as []))
+      //   .toList(),
+      billImage: (json['billImage'] as List<dynamic>?)?.map((e) => e as String)
+        .toList(),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
-      budget:  json['budget'] as Budget?,
+      budget:  json['budget'] == null
+        ? null
+        : Budget.fromJson(json['budget'] as Map<String, dynamic>),
   );
 }
 

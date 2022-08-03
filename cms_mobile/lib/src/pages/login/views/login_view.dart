@@ -18,7 +18,7 @@ class LoginPage extends GetView<LoginController> {
             margin: EdgeInsets.only(top: 30),
             height: screenSize.height * 0.2,
             padding: EdgeInsets.symmetric(
-              horizontal: screenSize.width * 0.15,
+              horizontal: screenSize.width * 0.2,
             ),
             child: Row(
               children: <Widget>[
@@ -37,37 +37,38 @@ class LoginPage extends GetView<LoginController> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 150),
+            margin: EdgeInsets.only(top: 180),
             child: Image(
                 width: screenSize.width * 1.2,
                 height: screenSize.height * 0.5,
                 fit: BoxFit.cover,
                 image: AssetImage('assets/images/login.jpg')),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 420),
-            height: screenSize.height * 0.5,
-            padding: EdgeInsets.symmetric(
-              horizontal: screenSize.width * 0.05,
-            ),
-            child: Row(
-              children: <Widget>[
-                SizedBox(width: 10),
-                Text(
-                  'Club Management System',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color(0xff114B5F),
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   margin: EdgeInsets.only(top: 700, left: 40, right: 30),
+          //   height: screenSize.height * 0.5,
+          //   padding: EdgeInsets.symmetric(
+          //     horizontal: screenSize.width * 0.05,
+          //   ),
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: <Widget>[
+          //       // SizedBox(width: 10),
+          //       Text(
+          //         'Club Management System',
+          //         textAlign: TextAlign.center,
+          //         style: TextStyle(
+          //             color: Color(0xff114B5F),
+          //             fontSize: 28,
+          //             fontWeight: FontWeight.bold),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Container(
             height: 80,
-            width: screenSize.width * 0.9,
-            margin: EdgeInsets.only(top: 650, right: 30, left: 30),
+            width: screenSize.width * 0.85,
+            // margin: EdgeInsets.only(top: 750, right: 40, left: 40),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
@@ -89,7 +90,7 @@ class LoginPage extends GetView<LoginController> {
                       size: 10.0 * 2.0,
                       color: Colors.white.withOpacity(0.6),
                     ),
-                    SizedBox(width: 50),
+                    SizedBox(width: 60),
                     SizedBox(height: 30),
                     Text(
                       'Sign in with FPT Mail',

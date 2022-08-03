@@ -6,15 +6,24 @@ part 'item.g.dart';
 
 @JsonSerializable()
 class Items {
-  DateTime? createdAt;
-  Item? item;
+  final int? id;
+  final String? status;
+  final int? totalPrice, unitPrice, quantity;
+  final DateTime? createdAt, updatedAt;
+  final Item? item;
 
   factory Items.fromJson(Map<String, dynamic> json) =>
       _$ItemsFromJson(json);
 
   Items({
+    this.id,
+    this.status,
+    this.item,
+    this.totalPrice,
+    this.unitPrice,
+    this.quantity,
     this.createdAt,
-    this.item
+    this.updatedAt,
   });
 
    Map<String, dynamic> toJson() => _$ItemsToJson(this);
@@ -23,21 +32,22 @@ class Items {
 
 @JsonSerializable()
 class Item {
-  final int? id, quantity;
-  final double? totalPrice, unitPrice;
-  final String? status;
-  DateTime? updatedAt;
+  final int? eventItemId;
+  final String? eventItemName, itemType, status, unit, description;
+  DateTime? updatedAt, createdAt;
 
   factory Item.fromJson(Map<String, dynamic> json) =>
       _$ItemFromJson(json);
 
   Item({
-    this.id,
-    this.quantity,
-    this.totalPrice,
-    this.unitPrice,
+    this.eventItemId,
+    this.eventItemName,
+    this.itemType,
     this.status,
+    this.unit,
+    this.description,
     this.updatedAt,
+    this.createdAt,
   });
 
    Map<String, dynamic> toJson() => _$ItemToJson(this);

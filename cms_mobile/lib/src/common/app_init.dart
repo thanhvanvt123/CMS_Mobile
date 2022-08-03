@@ -1,8 +1,14 @@
 import 'package:cms_mobile/src/data/api_helper.dart';
+import 'package:cms_mobile/src/models/notification.dart';
 import 'package:cms_mobile/src/services/api/account_service.dart';
+import 'package:cms_mobile/src/services/api/club_detail_service.dart';
 import 'package:cms_mobile/src/services/api/club_service.dart';
 import 'package:cms_mobile/src/services/api/event_detail_service.dart';
 import 'package:cms_mobile/src/services/api/event_service.dart';
+import 'package:cms_mobile/src/services/api/notification_check.dart';
+import 'package:cms_mobile/src/services/api/notification_read.dart';
+import 'package:cms_mobile/src/services/api/notification_service.dart';
+import 'package:cms_mobile/src/services/api/report_service.dart';
 import 'package:cms_mobile/src/services/global_states/share_states.dart';
 import 'package:cms_mobile/src/widgets/custom_bottom_bar.dart';
 import 'package:get/get.dart';
@@ -42,5 +48,15 @@ class AppInit {
     Get.lazyPut<IEventDetailService>(() => EventDetailService(), fenix: true);
 
     Get.lazyPut<IClubService>(() => ClubService(), fenix: true);
+
+    Get.lazyPut<IClubDetailService>(() => ClubDetailService(), fenix: true);
+
+    Get.lazyPut<INotificationService>(() => NotificationService(), fenix: true);
+
+    // Get.lazyPut<INotificationCheckService>(() => NotificationCheckService(), fenix: true);
+
+    Get.lazyPut<INotificationReadService>(() => NotificationReadService(), fenix: true);
+
+    Get.lazyPut<IReportService>(() => ReportService(), fenix: true);
   }
 }

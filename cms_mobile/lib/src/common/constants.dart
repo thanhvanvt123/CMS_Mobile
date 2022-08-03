@@ -5,15 +5,18 @@ import 'package:get/get.dart';
 class Constants {
 
   /// Base url for calling api
-  static final String baseUrl = "http://3.0.93.160:5500/";
+  //static final String baseUrl = "http://192.168.1.228:5500/"; //local
 
+  static final String baseUrl = "http://13.229.73.115:5500/"; 
   /// Timeout when calling API
   static final Duration timeout = Duration(seconds: 20);
 
   /// Default query of paging parameters
   static const Map<String, dynamic> defaultPagingQuery = {
     'page': '1',
-    'pageSize': '20'
+    'pageSize': '20',
+    'accountId': '',
+    'roleName': '',
   };
 
   static const Map<String, String> requestHeaders = {

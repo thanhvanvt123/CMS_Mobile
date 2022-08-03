@@ -17,6 +17,11 @@ class Endpoints {
 
   static const event = '$apiVer/moderator-manager/getEvents';
   static const eventDetail = '$apiVer/moderator-manager/getEventDetail?eventId=';
-  static const notification = '$apiVer/moderator-manager/getNotifications';
+  static const notifications = '$apiVer/moderator-manager/getNotifications';
   static const club = '$apiVer/moderator-manager/getClubs';
+  static const clubDetail = '$apiVer/moderator-manager/getClubDetail?clubId=';
+  //static const reward = '$apiVer/moderator-manager/getClubDetail?clubId=';
+  static const checkNoti = '$apiVer/moderator-manager/moderator-manager/checkNotifications';
+ static const readNoti = '$apiVer/moderator-manager/readNotification?notificationId=';
+  static const reportDetail = '$apiVer/moderator-manager/getReports?id=';
 }

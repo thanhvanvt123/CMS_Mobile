@@ -18,7 +18,9 @@ Rewards _$RewardsFromJson(Map<String, dynamic> json) {
     updatedAt: json['updatedAt'] == null
         ? null
         : DateTime.parse(json['updatedAt'] as String),
-    reward: json['reward'] as Reward?,
+    reward: json['reward'] == null
+        ? null
+        : Reward.fromJson(json['reward'] as Map<String, dynamic>),
   );
 }
 
@@ -32,14 +34,18 @@ Map<String, dynamic> _$RewardsToJson(Rewards instance) => <String, dynamic>{
       'reward': instance.reward,
     };
 
+// Reward convertMapToList(Map<String, dynamic> mapData) {
+//   return Reward.fromJson(mapData);
+// }
 //reward
 Reward _$RewardFromJson(Map<String, dynamic> json) {
   return Reward(
     rewardId: json['rewardId'] as int?,
-    price: json['price'] as double?,
+    price: json['price'] as int?,
     description: json['description'] as String?,
     image: json['image'] as String?,
     rewardName: json['rewardName'] as String?,
+    status: json['status'] as String?,
     updatedAt: json['updatedAt'] == null
         ? null
         : DateTime.parse(json['updatedAt'] as String),
@@ -55,6 +61,7 @@ Map<String, dynamic> _$RewardToJson(Reward instance) => <String, dynamic>{
       'description': instance.description,
       'image': instance.image,
       'rewardName': instance.rewardName,
+      'status': instance.status,
       'updatedAt': instance.updatedAt,
       'createdAt': instance.createdAt,
     };

@@ -114,7 +114,7 @@ class LoginController extends GetxController {
         }
       }
     } catch (e) {
-      BotToast.showText(text: "Your account not belong to FPT university!");
+      BotToast.showText(text: "Tài khoản của bạn không có quyền truy cập!");
     }
     BotToast.closeAllLoading();
   }

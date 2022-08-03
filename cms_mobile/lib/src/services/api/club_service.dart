@@ -42,21 +42,7 @@ class ClubService extends BaseService<Club> implements IClubService {
 
   @override
   Future<List<Club>> searchClubs(String keySearch) async {
-    // var byName = getAllBase2({
-    //   "isAll": "true",
-    //   "eventName": keySearch,
-    // }, {});
-    // // var byDescription = getAllBase({
-    // //   "isAll": "true",
-    // //   "description": keySearch,
-    // // });
-    // var result = await Future.wait([byName]);
-    // var list = result.expand((element) => element).toList();
-    // // final ids = list.map((e) => e.id).toSet();
-    // //list.retainWhere((x) => ids.remove(x.id));
-    // print("========== " + list.runtimeType.toString());
-    // print("list ========== " + list.toString());
-    // return list;
+    
     return getAllBase2({
       "clubName": keySearch.toLowerCase(),
     }, {});

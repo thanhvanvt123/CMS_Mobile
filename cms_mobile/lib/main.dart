@@ -26,8 +26,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: Fonts.montserrat),
       navigatorObservers: [BotToastNavigatorObserver()],
-      initialRoute: Routes.introduction,
+       initialRoute: Routes.introduction,
+      //initialRoute: Routes.eventDetail,
       getPages: AppPages.routes,
     );
   }
 }
+

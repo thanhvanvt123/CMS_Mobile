@@ -18,18 +18,24 @@ import 'package:intl/intl.dart';
 class HomeController extends GetxController {
   SharedStates states = Get.find();
   TextEditingController keySearch = TextEditingController();
+  TextEditingController keySearch2 = TextEditingController();
   final ScrollController scrollController = ScrollController();
   final showSlider = true.obs;
   final isSearching = false.obs;
+  final isHisSearching = false.obs;
   final eventName = "".obs;
   final eventId = 0.obs;
   var searchValue = "".obs;
   //var listNewEvent = listSearchEvents.obs;
-  // final event = Event().obs;
-  // final listItem = <Items>[].obs;
-  // final listBudget = <Budgets>[].obs;
-  // final listReward = <Rewards>[].obs;
-  // //final eventId = 0.obs;
+  final event = Event().obs;
+  final listItem = <Items>[].obs;
+  final listBudget = <Budgets>[].obs;
+  final listReward = <Rewards>[].obs;
+  final list = <Event>[].obs;
+  final list2 = <Event>[].obs;
+  final history = <Event>[].obs;
+  final listTmpEvents = <Event>[].obs;
+  final listSearchHisEvents = <Event>[].obs;
 
   // load data of event
   IEventService eventService = Get.find();
@@ -41,20 +47,20 @@ class HomeController extends GetxController {
   // }
 
   IEventDetailService eventDetailService = Get.find();
-  // Future<void> getEventDetail(int? id) async {
-    
-  //   print("========== " + eventId.value.toString());
-  //   Event? eventApi = await eventDetailService.getEventById(eventId.value);
-  //   //var event = await eventService.getEventById(eventId.value);
-  //   // event!.value = event.toString();
-  //   // sharedStates.event = event;
-  //   print("api " + eventApi.toString());
-  //   event.value = eventApi!;
-  //   // if (eventApi != null) {
-  //   //   event.value = eventApi;
-  //   // }
-  //   print("event value " + event.toString());
-  // }
+  Future<void> getEventDetail(int? id) async {
+    print("========== " + eventId.value.toString());
+    Event? eventApi =
+        (await eventDetailService.getEventById(eventId.value)) as Event?;
+    //var event = await eventService.getEventById(eventId.value);
+    // event!.value = event.toString();
+    // sharedStates.event = event;
+    print("api " + eventApi.toString());
+    event.value = eventApi!;
+    // if (eventApi != null) {
+    //   event.value = eventApi;
+    // }
+    print("event value " + event.toString());
+  }
 
   Future<void> goToDetail(int? id) async {
     if (id != null) {
@@ -65,54 +71,117 @@ class HomeController extends GetxController {
   Future<void> getEvents() async {
     //final events = await eventService.getEvents();
     //listEvents.value = events.data ?? [];
-    listEvents.value = await eventService.getEvents();
-    print("========= hello " + listEvents.string);
+    listTmpEvents.value = await eventService.getEvents();
+    // listEvents.value = await eventService.getEvents();
+     
+    print("dien=== " + list.string);
+    for (var item in listTmpEvents) {
+      print("=========== " + item.status.toString());
+
+      if (item.status!.toLowerCase().contains("đang hoạt động") || item.status!.toLowerCase().contains("đang diễn ra")) {
+        listEvents.add(item);
+        list.add(item);
+      }
+    }
+
   }
 
+  
+
   Future<void> searchEvents(String keySearch) async {
+    listSearchEvents.clear();
     if (keySearch.isEmpty) {
       listSearchEvents.clear();
       return;
     }
     //for(int i = 0; i <= listEvents.length; i++) {
-      if (!isSearching.value) {
-        isSearching.value = true;
+    if (!isSearching.value) {
+      isSearching.value = true;
       for (var item in listEvents) {
-        if(item.eventName!.toLowerCase().contains(keySearch)) {
+        if (item.eventName!.toLowerCase().contains(keySearch)) {
           listSearchEvents.add(item);
         }
         //listNewSearchEvents.value = listSearchEvents;
       }
       Timer(Duration(seconds: 1), () => isSearching.value = false);
-      }
-   // }
-      // for (dynamic item in listEvents){
-      //    if (item. == s) {
-      //       BotToast.showText(text: "Đăng nhập thành công");
-      //       Get.toNamed(Routes.home);
-      //     } else {
-      //       BotToast.showText(text: "Đăng nhập thất bại");
-      //     }
-      // }
-       
-      
-    //}
-    
-    // if (!isSearching.value) {
-    //   isSearching.value = true;
-    //   listSearchEvents.value =
-    //       await eventService.searchEvents(keySearch);
-    //   Timer(Duration(seconds: 1), () => isSearching.value = false);
-    // }
+    }
   }
+
+  Future<void> searchHisEvents(String keySearch2) async {
+    listSearchHisEvents.clear();
+    if (keySearch2.isEmpty) {
+      listSearchHisEvents.clear();
+      return;
+    }
+    print("his=== " + listSearchHisEvents.toString());
+    //for(int i = 0; i <= listEvents.length; i++) {
+    if (!isSearching.value) {
+      isSearching.value = true;
+      for (var item in history) {
+        if (item.eventName!.toLowerCase().contains(keySearch2)) {
+          listSearchHisEvents.add(item);
+        }
+        //listNewSearchEvents.value = listSearchEvents;
+      }
+      Timer(Duration(seconds: 1), () => isSearching.value = false);
+    }
+  }
+
+  Future<void> filterEvents(var choice) async {
+    // getEvents();
+    listEvents.clear();
+
+    for (var item in list) {
+      print("=========== " + item.status.toString());
+
+      if (item.status!.toLowerCase().contains(choice)) {
+        listEvents.add(item);
+      }
+    }
+    print("12345====== " + listEvents.toString());
+
+    Timer(Duration(seconds: 1), () => isSearching.value = false);
+  }
+
+  Future<void> filterHisEvents(var choice) async {
+    // getEvents();
+    history.clear();
+
+    for (var item in list2) {
+      print("=========== " + item.status.toString());
+
+      if (item.status!.toLowerCase().contains(choice)) {
+        history.add(item);
+      }
+    }
+    print("12345====== " + history.toString());
+
+    Timer(Duration(seconds: 1), () => isSearching.value = false);
+  }
+
+  Future<void> getHistoryEvents() async {
+    listTmpEvents.value = await eventService.getEvents();
+    print("dien=== " + listTmpEvents.string);
+    for (var item in listTmpEvents) {
+      print("=========== " + item.status.toString());
+
+      if (item.status!.toLowerCase().contains("chờ duyệt") || item.status!.toLowerCase().contains("chờ góp ý") || item.status!.toLowerCase().contains("hoàn thành") || 
+      item.status!.toLowerCase().contains("không duyệt")) {
+        history.add(item);
+        list2.add(item);
+      }
+    }
+    print("event his==== " + history.string);
+    
+  }
+  // }
 
   // @override
   // void onReady() {
   //   super.onReady();
   // }
 
-  Rx<List<Event>> foundEvents =
-      Rx<List<Event>>([]);
+  Rx<List<Event>> foundEvents = Rx<List<Event>>([]);
 
   // @override
   // void onInit() {
@@ -122,15 +191,13 @@ class HomeController extends GetxController {
 
   // @override
   // void onClose() {}
-  
 
-   final listSearchEvents = <Event>[].obs;
-   final listNewSearchEvents = <Event>[].obs;
-  
-  
+  final listSearchEvents = <Event>[].obs;
+  final listNewSearchEvents = <Event>[].obs;
+
   late IO.Socket socket;
   void connectAndListen() {
-    socket = IO.io("http://3.0.93.160:5505", <String, dynamic>{
+    socket = IO.io("http://13.229.73.115:5505", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
       //'extraHeaders': {'foo': 'bar'},
@@ -142,10 +209,12 @@ class HomeController extends GetxController {
     //         .setTransports(['websocket']).build());
     socket.onConnect((_) => print('connect'));
     socket.on("event-add", (_) => getEvents());
+    socket.on("event-update", (_) => getEvents());
+
     socket.onConnectError((data) => print('error : ' + data.toString()));
   }
 
-    bool initPage() {
+  bool initPage() {
     scrollController.addListener(() {
       final fromTop = scrollController.position.pixels;
       if (fromTop > 10) {
@@ -159,7 +228,7 @@ class HomeController extends GetxController {
   }
 
   TextEditingController controller1 = new TextEditingController();
-  
+
   // void filterPlayer(String eventSearch) {
   //   List<Event> results = [];
   //   if (eventSearch.isEmpty) {
@@ -181,20 +250,16 @@ class HomeController extends GetxController {
     if (!initPage()) return;
     initPage();
     getEvents();
+    getHistoryEvents();
     connectAndListen();
-    // controller1.addListener(() {
-      
-    //     searchValue = controller1.text as RxString;
-      
-    // });
-    
-    // getTickets();
-    
-    // String? id = Get.parameters['id'];
-    // if (id == null) return;
-    // eventId.value = int.parse(id);
-    //getEventDetail(eventId.value);
-    
+    controller1.addListener(() {
+      searchValue = controller1.text as RxString;
+    });
+
+    String? id = Get.parameters['id'];
+    if (id == null) return;
+    eventId.value = int.parse(id);
+    getEventDetail(eventId.value);
   }
 
   @override

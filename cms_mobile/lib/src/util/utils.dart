@@ -57,7 +57,7 @@ class Utils {
   Future uploadFile(File file) async {
     if (file == null) return;
   
-    final fileName = basename(file!.path);
+    final fileName = basename(file.path);
     final destination = 'files/$fileName';
     try {
       // task = FirebaseApi.uploadFile(destination, file!);
@@ -65,7 +65,7 @@ class Utils {
       if (task == null) {
         print('null cmnr');
       };
-      final snapshot = await task!.whenComplete(() {});
+      final snapshot = await task.whenComplete(() {});
       final urlDownload = await snapshot.ref.getDownloadURL();
       print('Download-Link: $urlDownload');
     } on FirebaseException catch (e) {

@@ -26,12 +26,7 @@ class HomePage extends GetView<HomeController> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   //late Future<List<Event>?> eventsFound = EventService.getAllEvent('');
 
-  // void mySetState(String search) {
-  //   setState(() {
-  //     eventsFound = EventService.getAllEvent(search);
-  //   });
-  // }
-  
+ 
   @override
   Widget build(BuildContext context) {
     //String valueSearch = ''
@@ -78,7 +73,7 @@ class HomePage extends GetView<HomeController> {
         } else {
           return SingleChildScrollView(
             controller: controller.scrollController,
-            scrollDirection: Axis.vertical,
+            //scrollDirection: Axis.vertical,
             child: Stack(
               children: [
                 Container(
@@ -89,180 +84,9 @@ class HomePage extends GetView<HomeController> {
                   // child: HomeSearchBar(),
                   //margin: const EdgeInsets.only(top: 55),
                   child: const HomeSearchBar(),
-                  //child: Row(
-                  //  mainAxisAlignment: MainAxisAlignment.start,
-                  // children: [
-                  //   Container(
-                  //child: HomeSearchBar(),
-                  //width: screenSize.width,
-                  // child: TextField(
-                  //   enableSuggestions: true,
-                  //   controller: searchController,
-                  //   // onFieldSubmitted: (searchValue) {
-                  //   //   searchController.clear();
-                  //   //   // streamController.add(text);
-
-                  //   //   controller.filterPlayer(searchController.text);
-                  //   // },
-                  //   onChanged: (value) => controller.searchEvents(value),
-                    
-                  //   style: TextStyle(color: Color(0xFF96A7AF), fontSize: 18),
-                  //   textAlign: TextAlign.left,
-                  //   decoration: InputDecoration(
-                  //     hintStyle:
-                  //         TextStyle(color: Color(0xFF96A7AF), fontSize: 18),
-                  //     hoverColor: Color(0xFF96A7AF),
-                  //     contentPadding: EdgeInsets.only(top: 5),
-                  //     hintText: "Search event",
-                  //     prefixIcon: Icon(
-                  //       Icons.search,
-                  //       color: Color(0xFF96A7AF),
-                  //     ),
-                  //     border: UnderlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(10)),
-                  //   ),
-                  // ),
-                  // child: FloatingSearchBar(
-
-                  //   automaticallyImplyBackButton: false,
-                  //   controller: FloatingSearchBarController(),
-                  //   clearQueryOnClose: true,
-                  //   hint: 'Tìm kiếm sự kiện...',
-                  //   scrollPadding: const EdgeInsets.only(bottom: 56),
-                  //   transitionDuration: const Duration(milliseconds: 800),
-                  //   transitionCurve: Curves.easeInOut,
-                  //   physics: const BouncingScrollPhysics(),
-                  //   openAxisAlignment: 0.0,
-                  //   debounceDelay: const Duration(milliseconds: 500),
-                  //   //scrollPadding: EdgeInsets.zero,
-                  //   // onQueryChanged: (query) {
-
-                  //   //     controller.searchEvents(query);
-                  //   // },
-
-                  //   onQueryChanged: (query) => controller.searchEvents(txt.text),
-                  //   //onFieldSubmitted: (query) => onFieldSubmitted,
-                  //   //onKeyEvent: (value) => controller.searchEvents(value.logicalKey.toString()),
-                  //   //controller.searchEvents(valueSearch);
-
-                  //   transition: CircularFloatingSearchBarTransition(),
-                  //   backdropColor: Colors.black.withOpacity(0.1),
-                  //   // actions: [
-                  //   //   FloatingSearchBarAction(
-                  //   //     showIfOpened: false,
-                  //   //     child: GestureDetector(
-                  //   //       //onTap: () => controller.searchEvents(valueSearch),
-                  //   //       child: Row(
-                  //   //         children: [
-                  //   //           Container(
-                  //   //             height: 34,
-                  //   //             width: 1.3,
-                  //   //             color: Colors.grey.shade300,
-                  //   //           ),
-                  //   //           Container(
-                  //   //             margin: const EdgeInsets.only(
-                  //   //                 left: 8, right: 10),
-                  //   //             child: Icon(Icons.apartment_rounded,
-                  //   //                 color: Colors.black45),
-                  //   //           ),
-                  //   //           // Text(
-                  //   //           //   Formatter.shorten(ev, 10),
-                  //   //           //   style: TextStyle(
-                  //   //           //     color: Colors.black54,
-                  //   //           //     fontSize: 15,
-                  //   //           //     fontWeight: FontWeight.w400,
-                  //   //           //   ),
-                  //   //           // ),
-                  //   //         ],
-                  //   //       ),
-                  //   //     ),
-                  //   //   ),
-                  //   //   FloatingSearchBarAction.searchToClear(
-                  //   //     showIfClosed: false,
-                  //   //   ),
-                  //   // ],
-                  //   builder: (context, transition) {
-                  //     return Material(
-                  //       color: Colors.white,
-                  //       elevation: 4.0,
-                  //       borderRadius: BorderRadius.circular(10),
-                  //       child: Container(
-                  //         child: Obx(() {
-                  //           final listSearchEvent =
-                  //               controller.listSearchEvents;
-                  //           print("search====" +
-                  //               listSearchEvent.toString());
-                  //           if (controller.isSearching.value)
-                  //             return Container(
-                  //                 padding: const EdgeInsets.only(
-                  //                     left: 20, top: 10, bottom: 10),
-                  //                 child: Center(
-                  //                     child:
-                  //                         CircularProgressIndicator()));
-                  //           if (listSearchEvent.isEmpty)
-                  //             return Container(
-                  //                 padding: const EdgeInsets.only(
-                  //                     left: 20, top: 10, bottom: 20),
-                  //                 child: Text("No events found!"));
-                  //           int count = listSearchEvent.length > 5
-                  //               ? 5
-                  //               : listSearchEvent.length;
-                  //           return ListView.separated(
-                  //             shrinkWrap: true,
-                  //             itemCount: count,
-                  //             separatorBuilder: (context, index) =>
-                  //                 Divider(
-                  //               indent: 15,
-                  //               endIndent: 15,
-                  //               height: 0,
-                  //               color: Colors.black38,
-                  //             ),
-                  //             itemBuilder: (context, index) {
-                  //               final event = listSearchEvent[index];
-                  //               //final img = event.imageUrl ?? '';
-                  //               final title =
-                  //                   Formatter.shorten(event.eventName);
-                  //               String location = event.location ?? '';
-                  //               return Container(
-                  //                 height: 85,
-                  //                 child: TextButton(
-                  //                   onPressed: () {},
-                  //                   child: ListTile(
-                  //                     contentPadding:
-                  //                         const EdgeInsets.all(0),
-                  //                     // leading: CircleAvatar(
-                  //                     //   radius: 25,
-                  //                     //   backgroundImage: NetworkImage(img),
-                  //                     // ),
-                  //                     title: Text(title),
-                  //                     subtitle: Text(location),
-                  //                     trailing: OutlinedButton.icon(
-                  //                       onPressed: () {
-                  //                         controller
-                  //                             .goToDetail(event.eventId);
-                  //                       },
-                  //                       icon: Icon(
-                  //                         Icons.local_activity,
-                  //                         size: 24,
-                  //                       ),
-                  //                       label: Text("Chi Tiết"),
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //               );
-                  //             },
-                  //           );
-                  //         }),
-                  //       ),
-                  //     );
-                  //   },
-                  // ),
-                  //   ),
-                  // ],
-                  //),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: screenSize.height * 0.1),
+                  margin: EdgeInsets.only(top: screenSize.height),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey.shade200),
@@ -272,7 +96,7 @@ class HomePage extends GetView<HomeController> {
                       Obx(() {
                         var listEvent = controller.listEvents;
                         return Container(
-                          height: screenSize.height * 0.7,
+                          height: screenSize.height,
                           margin: const EdgeInsets.only(left: 0),
                           child: ListView.builder(
                             addSemanticIndexes: true,
@@ -287,7 +111,8 @@ class HomePage extends GetView<HomeController> {
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(
-                                    left: 0,
+                                    top: 50,
+                                    left: 10,
                                     right: 10,
                                     bottom: 10,
                                   ),
@@ -321,6 +146,7 @@ class HomePage extends GetView<HomeController> {
                                                 child: Text(
                                                   Formatter.shorten(
                                                       event.eventName),
+                                                  //'Đổi pin lấy sách cũ'
                                                 ),
                                               ),
                                               subtitle: Column(
@@ -344,6 +170,7 @@ class HomePage extends GetView<HomeController> {
                                                           event.reward!.length
                                                                   .toString() +
                                                               ' giải thưởng',
+                                                          //'1 giải thưởng',
                                                           style: TextStyle(
                                                             color: Color(
                                                                 0xFF0C9869),
@@ -363,6 +190,7 @@ class HomePage extends GetView<HomeController> {
                                                           event.budget!.length
                                                                   .toString() +
                                                               ' chi phí',
+                                                          //'0 chi phí',
                                                           style: TextStyle(
                                                             color: Color(
                                                                 0xFF0C9869),
@@ -383,6 +211,7 @@ class HomePage extends GetView<HomeController> {
                                                                   .length
                                                                   .toString() +
                                                               ' phụ kiện',
+                                                          //'1 phụ kiện',
                                                           style: TextStyle(
                                                             color: Color(
                                                                 0xFF0C9869),
@@ -411,6 +240,7 @@ class HomePage extends GetView<HomeController> {
                                                           child: Text(
                                                             event.location
                                                                 .toString(),
+                                                            //'Đại học FPT',
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
@@ -435,9 +265,11 @@ class HomePage extends GetView<HomeController> {
                                                               Color(0xFF0C9869),
                                                           size: 20,
                                                         ),
-                                                        Text(event
-                                                            .created!.fullName
-                                                            .toString()),
+                                                         Text(
+                                                        event.created!.fullName
+                                                            .toString()
+                                                        //'Le Thanh Van'
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -470,6 +302,7 @@ class HomePage extends GetView<HomeController> {
                                                         Text(
                                                           Formatter.date(
                                                               event.startDate),
+                                                          //'12/1/2023'
                                                         ),
                                                         const VerticalDivider(
                                                           width: 100,
@@ -484,6 +317,7 @@ class HomePage extends GetView<HomeController> {
                                                         Text(
                                                           Formatter.date(
                                                               event.endDate),
+                                                          //'12/2/2023'
                                                           //textAlign: TextAlign.right,
                                                         ),
                                                       ],

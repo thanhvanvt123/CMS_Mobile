@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:cms_mobile/src/models/account.dart';
 import 'package:cms_mobile/src/models/event.dart';
+import 'package:cms_mobile/src/models/reward.dart';
 import 'package:cms_mobile/src/models/role.dart';
 import 'package:flutter/material.dart';
+import 'package:cms_mobile/src/models/club.dart';
 
 class Paging<T> {
   final String? message;
@@ -55,15 +57,50 @@ class Paging<T> {
 
   EventDetail convertToListV4(Function fromJson) {
     EventDetail event = new EventDetail();
-    rawData!.forEach((key, value) {
-      if(key == "event"){
-          event = EventDetail.fromJson(value); 
 
+          event = EventDetail.fromJson(rawData!); 
+    return event;
+  }
+
+  EventDetail convertToListV5(Function fromJson) {
+    EventDetail event = new EventDetail();
+    Reward r = new Reward();
+    rawData!.forEach((key, value) {
+      if(key == "data"){
+          event.reward = EventDetail.fromJson(value).reward; 
+          
         }
+      // if(key == 'rewards'){
+      //   event.reward = Rewards.fromJson(value) as List<Rewards>?;
+      // }
     });
     //print("event=== " + event.toString());
     return event;
   }
+
+  List<T> convertToListV6(Function fromJson) {
+    List<T> r = [];
+    rawData!.forEach((key, value) {
+      if(key == "rewards"){
+          r = EventDetail.fromJson(value).reward!.map<T>((x) => fromJson(x)).toList(); 
+        }
+    });
+    //print("event=== " + event.toString());
+    return r;
+  }
+
+  // ClubDetail convertToListV5(Function fromJson) {
+  //   ClubDetail club = new ClubDetail();
+    
+  //     if(rawData != null){
+        
+  //         club = ClubDetail.fromJson(Paging.fromJson()); 
+
+  //       }
+    
+  //   print("club=== " + club.toString());
+  //   return club;
+  // }
 
   factory Paging.fromJson(Map<String, dynamic> json) => Paging<T>(
         message: json['message'] as String?,
@@ -76,6 +113,8 @@ class Paging<T> {
         'message': this.message,
         'data': this.data,
       };
+
+
 
       
 }

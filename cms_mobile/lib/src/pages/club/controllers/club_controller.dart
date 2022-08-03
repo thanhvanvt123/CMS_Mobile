@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cms_mobile/src/models/club.dart';
 import 'package:cms_mobile/src/routes/routes.dart';
+import 'package:cms_mobile/src/services/api/club_detail_service.dart';
 import 'package:cms_mobile/src/services/api/club_service.dart';
 import 'package:cms_mobile/src/services/api/event_detail_service.dart';
 import 'package:cms_mobile/src/services/global_states/share_states.dart';
@@ -12,6 +13,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:intl/intl.dart';
 
+
 class ClubController extends GetxController {
   SharedStates states = Get.find();
   TextEditingController keySearch = TextEditingController();
@@ -21,27 +23,31 @@ class ClubController extends GetxController {
   final clubName = "".obs;
   final clubId = 0.obs;
   var searchValue = "".obs;
+  final club = Club().obs;
 
   // load data of event
   IClubService clubService = Get.find();
   final listClubs = <Club>[].obs;
+  final list = <Club>[].obs;
 
   //IEventDetailService eventDetailService = Get.find();
 
-  // Future<void> goToDetail(int? id) async {
-  //   if (id != null) {
-  //     Get.toNamed(Routes.eventDetail, parameters: {"eventId": id.toString()});
-  //   }
-  // }
+  Future<void> goToDetail(int? id) async {
+    if (id != null) {
+      Get.toNamed(Routes.clubDetail, parameters: {"clubId": id.toString()});
+    }
+  }
 
   Future<void> getClubs() async {
     //final events = await eventService.getEvents();
     //listEvents.value = events.data ?? [];
     listClubs.value = await clubService.getClubs();
+    list.value = await clubService.getClubs();
     print("========= hello " + listClubs.string);
   }
 
   Future<void> searchClubs(String keySearch) async {
+    listSearchClubs.clear();
     if (keySearch.isEmpty) {
       listSearchClubs.clear();
       return;
@@ -57,25 +63,8 @@ class ClubController extends GetxController {
       }
       Timer(Duration(seconds: 1), () => isSearching.value = false);
       }
-   // }
-      // for (dynamic item in listEvents){
-      //    if (item. == s) {
-      //       BotToast.showText(text: "Đăng nhập thành công");
-      //       Get.toNamed(Routes.home);
-      //     } else {
-      //       BotToast.showText(text: "Đăng nhập thất bại");
-      //     }
-      // }
-       
+
       
-    //}
-    
-    // if (!isSearching.value) {
-    //   isSearching.value = true;
-    //   listSearchEvents.value =
-    //       await eventService.searchEvents(keySearch);
-    //   Timer(Duration(seconds: 1), () => isSearching.value = false);
-    // }
   }
 
   // @override
@@ -94,7 +83,7 @@ class ClubController extends GetxController {
   
   late IO.Socket socket;
   void connectAndListen() {
-    socket = IO.io("http://3.0.93.160:5505", <String, dynamic>{
+    socket = IO.io("http://13.229.73.115:5505", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
       //'extraHeaders': {'foo': 'bar'},
@@ -106,6 +95,8 @@ class ClubController extends GetxController {
     //         .setTransports(['websocket']).build());
     socket.onConnect((_) => print('connect'));
     socket.on("club-add", (_) => getClubs());
+     socket.on("club-add", (_) => print("helo"));
+    socket.on("club-update", (_) => getClubs());
     socket.onConnectError((data) => print('error : ' + data.toString()));
   }
 
@@ -124,20 +115,36 @@ class ClubController extends GetxController {
 
   TextEditingController controller1 = new TextEditingController();
   
-  // void filterPlayer(String eventSearch) {
-  //   List<Event> results = [];
-  //   if (eventSearch.isEmpty) {
-  //     results = listEvents;
-  //   } else {
-  //     results = listEvents
-  //         .where((element) => eventName
-  //             .toString()
-  //             .toLowerCase()
-  //             .contains(eventSearch.toLowerCase()))
-  //         .toList();
-  //   }
-  //   foundEvents.value = results;
-  // }
+  void filterClub(var choice) {
+    listClubs.clear();
+
+    for (var item in list) {
+      print("=========== " + item.status.toString());
+
+      if (item.status!.contains(choice)) {
+        listClubs.add(item);
+      }
+    }
+    print("12345====== " + listClubs.toString());
+
+    Timer(Duration(seconds: 1), () => isSearching.value = false);
+  }
+
+  IClubDetailService clubDetailService = Get.find();
+  Future<void> getClubDetail(int? id) async {
+    
+    print("========== " + clubId.value.toString());
+    Club? clubApi = (await clubDetailService.getClubById(clubId.value)) as Club?;
+    //var event = await eventService.getEventById(eventId.value);
+    // event!.value = event.toString();
+    // sharedStates.event = event;
+    print("api " + clubApi.toString());
+    club.value = clubApi!;
+    // if (eventApi != null) {
+    //   event.value = eventApi;
+    // }
+    print("event value " + club.toString());
+  }
 
   @override
   void onInit() {
@@ -146,18 +153,11 @@ class ClubController extends GetxController {
     initPage();
     getClubs();
     connectAndListen();
-    // controller1.addListener(() {
-      
-    //     searchValue = controller1.text as RxString;
-      
-    // });
     
-    // getTickets();
-    
-    // String? id = Get.parameters['id'];
-    // if (id == null) return;
-    // eventId.value = int.parse(id);
-    //getEventDetail(eventId.value);
+    String? id = Get.parameters['id'];
+    if (id == null) return;
+    clubId.value = int.parse(id);
+    getClubDetail(clubId.value);
     
   }
 

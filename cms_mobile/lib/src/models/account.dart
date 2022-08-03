@@ -44,3 +44,32 @@ class Account {
   Map<String, dynamic> toJson() => _$AccountToJson(this);
   
 }
+
+@JsonSerializable()
+class Accounts {
+  final int? accountId, clubId, id;
+  final Account? account;
+  final DateTime? createDate, modifyDate;
+  final String? status;
+
+
+
+  // factory Account.fromJson(Map<String, dynamic> json) =>
+  //     _$AccountFromJson(json);
+  factory Accounts.fromJson(Map<String, dynamic> json) =>
+      _$AccountsFromJson(json);
+    
+  Accounts({
+    this.accountId,
+    this.clubId,
+    this.id,
+    this.account,
+    this.createDate,
+    this.status,
+    this.modifyDate,
+  });
+
+  // Map<String, dynamic> toJson() => _$AccountToJson(this);
+  Map<String, dynamic> toJson() => _$AccountsToJson(this);
+  
+}

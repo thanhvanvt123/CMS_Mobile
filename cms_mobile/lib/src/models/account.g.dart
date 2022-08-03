@@ -37,3 +37,34 @@ Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
       'roles': instance.role,
       'clubs': instance.club,
     };
+
+  Accounts _$AccountsFromJson(Map<String, dynamic> json) {
+  return Accounts(
+    accountId: json['accountId'] as int?,
+    clubId: json['clubId'] as int?,
+    id: json['id'] as int?,
+    status: json['status'] as String?,
+    createDate: json['createdAt'] == null
+        ? null
+        : DateTime.parse(json['createdAt'] as String),
+    modifyDate: json['updatedAt'] == null
+        ? null
+        : DateTime.parse(json['updatedAt'] as String),
+    account:  json['account'] == null
+        ? null
+        : Account.fromJson(json['account'] as Map<String, dynamic>),
+  );
+}
+// Account convertMapToList(Map<String, dynamic> mapData) {
+//   return Account.fromJson(mapData);
+// }
+
+Map<String, dynamic> _$AccountsToJson(Accounts instance) => <String, dynamic>{
+      'accountId': instance.accountId,
+      'clubId': instance.clubId,
+      'id': instance.id,
+      'updatedAt': instance.modifyDate,
+      'status': instance.status,
+      'createdAt': instance.createDate,
+      'account': instance.account,
+    };

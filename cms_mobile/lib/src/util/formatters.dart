@@ -19,7 +19,12 @@ class Formatter {
     return s.substring(0, cut) + ' ...';
   }
 
-  static String price(double? price, [String currency = "VNĐ"]) {
+  static String price(int? price, [String currency = "VNĐ"]) {
+    final formatter = new NumberFormat("###,###,###,###");
+    return formatter.format(price) + ' $currency';
+  }
+
+  static String price2(double? price, [String currency = "VNĐ"]) {
     final formatter = new NumberFormat("###,###,###,###");
     return formatter.format(price) + ' $currency';
   }

@@ -7,8 +7,8 @@ part 'budget.g.dart';
 @JsonSerializable()
 class Budgets {
   final int? id;
-  final double? price;
-  final String? billImage;
+  final int? price;
+  final List<String>? billImage;
   DateTime? createdAt;
   DateTime? updatedAt;
   Budget? budget;
@@ -32,7 +32,7 @@ class Budgets {
 @JsonSerializable()
 class Budget {
   final int? budgetId;
-  final String? budgetName, contact, description, location, provider;
+  final String? budgetName, contact, description, location, provider, status;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -46,6 +46,7 @@ class Budget {
     this.description,
     this.location,
     this.provider,
+    this.status,
     this.updatedAt,
     this.createdAt,
   });

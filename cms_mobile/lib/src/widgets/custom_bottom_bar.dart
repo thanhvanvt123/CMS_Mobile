@@ -24,6 +24,7 @@ class BottomItem extends SalomonBottomBarItem {
     required this.route,
     required this.text,
     required this.icon,
+    // this.badge,
     this.color = const Color(0xFF0C9869),
   }) : super(
     title: Text(text),
@@ -34,24 +35,24 @@ class BottomItem extends SalomonBottomBarItem {
 
 final items = [
   BottomItem(
-    text: 'Home',
+    text: 'Trang chủ',
     icon: Icon(Icons.home),
     route: Routes.home,
   ),
   BottomItem(
-    text: 'Club',
-    icon: Icon(Icons.security),
+    text: 'Câu lạc bộ',
+    icon: Icon(FontAwesomeIcons.users),
     route: Routes.clubs,
   ),
   BottomItem(
-    text: 'Notification',
-    icon: Icon(FontAwesomeIcons.bell),
-    route: Routes.notifications,
+    text: 'Thông báo',
+    icon:  Icon(FontAwesomeIcons.bell),
+    route: Routes.notifications, 
   ),
   BottomItem(
-    text: 'Settings',
-    icon: Icon(Icons.settings),
-    route: Routes.settings,
+    text: 'Hồ sơ',
+    icon:  Icon(Icons.person),
+    route: Routes.profileDetail,
   ),
 ];
 

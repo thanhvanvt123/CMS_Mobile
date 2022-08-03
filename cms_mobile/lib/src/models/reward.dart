@@ -31,8 +31,8 @@ class Rewards {
 @JsonSerializable()
 class Reward {
   final int? rewardId;
-  final double? price;
-  final String? description, image, rewardName;
+  final int? price;
+  final String? description, image, rewardName, status;
   DateTime? updatedAt;
   DateTime? createdAt;
 
@@ -45,6 +45,7 @@ class Reward {
     this.description,
     this.image,
     this.rewardName,
+    this.status,
     this.updatedAt,
     this.createdAt,
   });
